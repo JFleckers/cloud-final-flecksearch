@@ -1,0 +1,51 @@
+# FleckSearch
+
+## Compiling the jars for the Cluster
+To perform this step, you must have a running Dataproc cluster on the Google cloud, and must also have the required 
+Hadoop jar files in some directory accessible to the current working directory. The path to this directory will be 
+referred to in the following instructions as `[JAR_PATH]`.
+
+### Compiling InvertedIndex
+This jar is responsible for constructing the Inverted Indices on the cluster
+To compile and package:
+
+1. `cd InvertedIndecies`
+1. `javac --release 8 -cp "[JAR_PATH]" InvertedIndex.java`
+1. `jar cf ii.jar InvertedIndex*.class`
+
+The jar `ii.jar` must then be uploaded to the GCP cluster, and will be referenced in job request by FleckSearch
+
+### Compiling TopN
+This jar is responsible for determine the Top N most common words, where N is a number specified by the user
+To compile and package:
+
+1. `cd TopN`
+1. `javac --release 8 -cp "[JAR_PATH]" TopN.java`
+1. `jar cf tn.jar TopN*.class`
+
+The jar `tn.jar` must then be uploaded to the GCP cluster, and will be referenced in job request by FleckSearch
+
+## References Cited:
+https://hadoop.apache.org/docs/current/api/index.html
+
+https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
+
+https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/regex/Pattern.html#sum
+
+https://www.geeksforgeeks.org/how-to-find-top-n-records-using-mapreduce/
+
+http://www.dcs.bbk.ac.uk/~dell/teaching/cc/book/ditp/ditp_ch4.pdf
+
+https://netbeans.org/kb/docs/java/gui-functionality.html
+
+https://stackoverflow.com/questions/20987838/how-to-connect-two-jframes-in-netbeans-without-using-swing
+
+https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/io/BufferedReader.html
+
+https://hadoopi.wordpress.com/2013/06/05/hadoop-implementing-the-tool-interface-for-mapreduce-driver/
+
+https://github.com/googleapis/java-dataproc/blob/master/samples/snippets/src/main/java/SubmitHadoopFsJob.java
+
+https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute
+
+https://stackoverflow.com/questions/43309323/how-to-run-jar-file-java-lang-noclassdeffounderror/43309812
