@@ -49,3 +49,8 @@ https://github.com/googleapis/java-dataproc/blob/master/samples/snippets/src/mai
 https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute
 
 https://stackoverflow.com/questions/43309323/how-to-run-jar-file-java-lang-noclassdeffounderror/43309812
+
+https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
+https://hub.docker.com/_/maven?tab=description
+https://docs.docker.com/engine/reference/builder/#copy
+https://docs.docker.com/develop/develop-images/multistage-build/
