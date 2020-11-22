@@ -25,32 +25,62 @@ To compile and package:
 
 The jar `tn.jar` must then be uploaded to the GCP cluster, and will be referenced in job request by FleckSearch
 
+## Running the Docker Container
+
 ## References Cited:
-https://hadoop.apache.org/docs/current/api/index.html
+The following section compromises the array of sources consulted for this project. They include things like official
+documentation, tutorials, and publicly answered questions.
 
-https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
+The overall Java API for Hadoop was instrumental for implementing both jar programs: 
+* https://hadoop.apache.org/docs/current/api/index.html
 
-https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/regex/Pattern.html#sum
+The official Hadoop MapReduce tutorial also formed the basis for both jar files, in terms of implementing the Mapper and Reducer classes:
+* https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
 
-https://www.geeksforgeeks.org/how-to-find-top-n-records-using-mapreduce/
+The official Java API documentation for Java 8 was referenced in the construction of all three applications, particularly
+its documentation on Arrays, Regex Patterns, and BufferedReader:
+* https://docs.oracle.com/javase/8/docs/api/
 
-http://www.dcs.bbk.ac.uk/~dell/teaching/cc/book/ditp/ditp_ch4.pdf
+The following except shared in class on Inverted Indices provided the general high-level structure of my implementation:
+* http://www.dcs.bbk.ac.uk/~dell/teaching/cc/book/ditp/ditp_ch4.pdf
 
-https://netbeans.org/kb/docs/java/gui-functionality.html
+The following tutorial also formed the basis for my TopN algorithm:
+* https://www.geeksforgeeks.org/how-to-find-top-n-records-using-mapreduce/
 
-https://stackoverflow.com/questions/20987838/how-to-connect-two-jframes-in-netbeans-without-using-swing
+The following tutorial by Antoine Amend also assisted me in implementing the Tool interface, which would allow for command-line specified 
+arguments, specifically the size of N. The above guide omitted this requirement:
+* https://hadoopi.wordpress.com/2013/06/05/hadoop-implementing-the-tool-interface-for-mapreduce-driver/
 
-https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/io/BufferedReader.html
+The following guide from Netbeans assisted me heavily in leveraging Netbean's built-in GUI constructor to create the required GUI: 
+* https://netbeans.org/kb/docs/java/gui-functionality.html
 
-https://hadoopi.wordpress.com/2013/06/05/hadoop-implementing-the-tool-interface-for-mapreduce-driver/
+This StackOverflow answer from user Paul Samsotha assisted with constructing a Multi-JFrame application:
+* https://stackoverflow.com/a/20988058
 
-https://github.com/googleapis/java-dataproc/blob/master/samples/snippets/src/main/java/SubmitHadoopFsJob.java
+This example code, provided by Google, formed the basis for executing both of my Hadoop Jobs on the cluster:
+* https://github.com/googleapis/java-dataproc/blob/master/samples/snippets/src/main/java/SubmitHadoopFsJob.java
 
-https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute
+The official Apache Maven documentation, specifically its tutorial on using Maven and constructing a pom file, was used
+to quickly packaged my gui application into a runnable jar:
+* https://maven.apache.org/guides/getting-started/index.html
+* https://maven.apache.org/pom.html
 
-https://stackoverflow.com/questions/43309323/how-to-run-jar-file-java-lang-noclassdeffounderror/43309812
+This StackOverflow answer from Olivier Refalo helped fix an issue with Maven's packaging of jars:
+* https://stackoverflow.com/a/9689877
 
-https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
-https://hub.docker.com/_/maven?tab=description
-https://docs.docker.com/engine/reference/builder/#copy
-https://docs.docker.com/develop/develop-images/multistage-build/
+This StackOverflow answer from user cactuschibre helped me included the required GCP dependencies into my jar file 
+* https://stackoverflow.com/a/43309812
+
+Docker's Official documentation on building Dockerfiles and constructing multi-staged builds was invaluable to construing 
+a Dockerfile that would allow me to run my GUI within a container:
+* https://docs.docker.com/engine/reference/builder/
+* https://docs.docker.com/develop/develop-images/multistage-build/
+
+I utilized the official Maven Docker image, which can be found on Docker Hub:
+* https://hub.docker.com/_/maven?tab=description
+
+When attempting to use the basic Maven image to compile and package my FleckSearch GUI application, I ran into an issue stemming from
+that image not containing the needed libex6 library to render the GUI. The following blog post from Jessica Kerr demonstrated
+a similar issue on a different system, and found that using an image which contained a linux distribution (In this case,
+an image of OpenJDK which contained Debain) would allow me to download and install the required library package before running: 
+* https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
