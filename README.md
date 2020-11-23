@@ -11,7 +11,7 @@ https://pitt-my.sharepoint.com/:v:/g/personal/jpf47_pitt_edu/EdoGE0Z_kNtEgv5DMDr
 ## Compiling the jars for the Cluster
 To perform this step, you must have a running Dataproc cluster on the Google cloud, and must also have the required 
 Hadoop Jar Files (the ones located in the module on Canvas) in some directory accessible to the current working directory. The path to this directory will be 
-referred to in the following instructions as `[JAR_PATH]`.
+referred to in the following instructions as `[JAR_PATH]`. It is also assumed that all needed data files are already present on the cluster.
 
 ### Compiling InvertedIndex
 This jar is responsible for constructing the Inverted Indices on the cluster
