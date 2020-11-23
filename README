@@ -13,7 +13,7 @@ To compile and package:
 1. `javac --release 8 -cp "[JAR_PATH]" InvertedIndex.java`
 1. `jar cf ii.jar InvertedIndex*.class`
 
-The jar `ii.jar` must then be uploaded to the GCP cluster, and will be referenced in job request by FleckSearch
+The jar `ii.jar` must then be uploaded to the GCP cluster, and will be referenced in a job request by FleckSearch
 
 ### Compiling TopN
 This jar is responsible for determine the Top N most common words, where N is a number specified by the user
@@ -23,9 +23,52 @@ To compile and package:
 1. `javac --release 8 -cp "[JAR_PATH]" TopN.java`
 1. `jar cf tn.jar TopN*.class`
 
-The jar `tn.jar` must then be uploaded to the GCP cluster, and will be referenced in job request by FleckSearch
+The jar `tn.jar` must then be uploaded to the GCP cluster, and will be referenced in a job request by FleckSearch
 
-## Running the Docker Container
+## Running the GUI Docker Container
+
+### Authentication
+In order to use this application on your cluster, there are a few variables that must be modified before you can begin.
+One resides in the Dockerfile located in the FleckSearch Directory, while the other two lie in the source code located at:
+`\FleckSearch\src\main\java\work\flecksearch`
+
+1. Dockerfile
+    * Modify the Dockerfile's line 12 to include the name of you GCP key JSON file as [key-file], which should be placed in the same
+     FleckSearch directory as the Dockerfile
+    * `ENV GOOGLE_APPLICATION_CREDENTIALS="/[key-file].json"`
+    
+1. FrontEnd.java
+    * This file must be modified on lines 114 to 120 (located in the `submitJob()` method) as follows:
+    ```
+        String projectId = "[project-id]"; //change to your project id for your cluster
+        String region = "[region]"; //change to the region where your cluster resides 
+        String clusterName = "[cluster-name]"; //change to the name of your cluster you wish to run this proccess on
+        String hadoopIndexMain = "InvertedIndex"; //keep the same
+        String hadoopIndexJar = "[jar-path]/ii.jar"; //change to the path where the jar is located on the cluster
+        String hadoopIndexArgs = "[input-path]/* [output-path]"; //change to specify the input path where the input directories reside, and specify the output path you would like to use
+        String hadoopcatQuery = "-cat [output-path]/*"; //change to include the same output path as above
+    ``` 
+1. DisplayTopN.java
+* This file must be modified on lines 123 to 129 (located in the `submitJob()` method) as follows:
+    ```
+        String projectId = "[project-id]"; //change to your project id for your cluster
+        String region = "[region]"; //change to the region where your cluster resides
+        String clusterName = "[cluster-name]"; //change to the name of your cluster you wish to run this proccess on
+        String hadoopTopNMain = "TopN"; //keep the same
+        String hadoopTopNJar = "[jar-path]/tn.jar"; //change to the path where the jar is located on the cluster
+        String hadoopTopNArgs = "-D nValue="+n+" [index-input-path] [output-path]/Top"+n; //change the input path to the output of the prevoiusly ran InvertedIndex, and specify the output path you would like to use
+        String hadoopcatQuery = "-cat [output-path]/Top"+n+"/*"; //specify the same path as above
+    ``` 
+  
+### Starting the Application
+To the run the Docker container, make sure to have Xming running on your system, and follow the instructions linked here:
+https://docs.microsoft.com/en-us/archive/blogs/jamiedalton/windows-10-docker-gui
+Then, run the following commands to build and run the GUI application in Docker:
+
+1. `cd FleckSearch`
+1. `docker build -t flecksearch .`
+1. `docker run -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix flecksearch`
+
 
 ## References Cited:
 The following section compromises the array of sources consulted for this project. They include things like official
@@ -84,3 +127,6 @@ that image not containing the needed libex6 library to render the GUI. The follo
 a similar issue on a different system, and found that using an image which contained a linux distribution (In this case,
 an image of OpenJDK which contained Debain) would allow me to download and install the required library package before running: 
 * https://jessitron.com/2020/04/17/run-alloy-on-windows-in-docker/
+
+I also used the following fix from Xming's website to stop Xming from randomly crashing:
+* http://www.straightrunning.com/XmingNotes/trouble.php#head-14
