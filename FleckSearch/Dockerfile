@@ -9,7 +9,7 @@ RUN apt update
 RUN apt install -y libxtst6 libxrender1
 
 ENV AWT_TOOLKIT=MToolkit
-ENV GOOGLE_APPLICATION_CREDENTIALS="/WordCountFleckenstein-5b8587cf58f9.json"
+ENV GOOGLE_APPLICATION_CREDENTIALS="/[key-file].json"
 
 WORKDIR ./target
 CMD ["java", "-jar", "FleckSearch-1-jar-with-dependencies.jar"]
