@@ -9,24 +9,20 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class InvertedIndex {
 
     public static class IndexMapper extends Mapper<Object, Text, Text, Text> {
 
-        ArrayList<String> stopwords = new ArrayList<String>(Arrays.asList("THE", "AND", "OF", "TO", "A", "IN", "HE", "THAT", "I", "HIS"));
+        HashSet<String> stopwords = new HashSet<>(Arrays.asList("THE", "AND", "OF", "TO", "A", "IN", "HE", "THAT", "I", "HIS"));
 
         @Override
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             FileSplit fs = (FileSplit) context.getInputSplit();
             HashMap<String, Integer> hm = new HashMap<String, Integer>();
             String[] line = value.toString().split("\\s");
-            //TODO implement stopwords
             for(String s:line){
                 s = s.toUpperCase();
                 s = s.replaceAll("\\p{Punct}","");
