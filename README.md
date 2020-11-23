@@ -1,12 +1,16 @@
 # FleckSearch
 Author: James Fleckenstein
 
+_This project was completed individually._ 
+
 This repository serves as my submission for the CS 1660 term project, Option 2.
 
+Required Video Code and Application Walkthrough:
+https://pitt-my.sharepoint.com/:v:/g/personal/jpf47_pitt_edu/EdoGE0Z_kNtEgv5DMDr3OxABzqimjjPtawR4drEUtgRYbA?e=m2eua8
 
 ## Compiling the jars for the Cluster
 To perform this step, you must have a running Dataproc cluster on the Google cloud, and must also have the required 
-Hadoop jar files in some directory accessible to the current working directory. The path to this directory will be 
+Hadoop Jar Files (the ones located in the module on Canvas) in some directory accessible to the current working directory. The path to this directory will be 
 referred to in the following instructions as `[JAR_PATH]`.
 
 ### Compiling InvertedIndex
@@ -37,7 +41,7 @@ One resides in the Dockerfile located in the FleckSearch Directory, while the ot
 `\FleckSearch\src\main\java\work\flecksearch`
 
 1. Dockerfile
-    * Modify the Dockerfile's line 12 to include the name of you GCP key JSON file as [key-file], which should be placed in the same
+    * Modify the Dockerfile's line 12 to include the name of you GCP key JSON file as `[key-file]`, which should be placed in the same
      FleckSearch directory as the Dockerfile
     * `ENV GOOGLE_APPLICATION_CREDENTIALS="/[key-file].json"`
     
@@ -65,7 +69,7 @@ One resides in the Dockerfile located in the FleckSearch Directory, while the ot
     ``` 
   
 ### Starting the Application
-To the run the Docker container, make sure to have Xming running on your system, and follow the instructions linked here:
+To the run the Docker container, make sure to have Xming running on your system by following the instructions linked here:
 https://docs.microsoft.com/en-us/archive/blogs/jamiedalton/windows-10-docker-gui
 Then, run the following commands to build and run the GUI application in Docker:
 
