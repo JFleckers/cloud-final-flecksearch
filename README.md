@@ -92,7 +92,7 @@ The official Java API documentation for Java 8 was referenced in the constructio
 its documentation on Arrays, Regex Patterns, and BufferedReader:
 * https://docs.oracle.com/javase/8/docs/api/
 
-The following except shared in class on Inverted Indices provided the general high-level structure of my implementation:
+The following chapter shared in class on Inverted Indices provided the general high-level structure of my implementation:
 * http://www.dcs.bbk.ac.uk/~dell/teaching/cc/book/ditp/ditp_ch4.pdf
 
 The following tutorial also formed the basis for my TopN algorithm:
@@ -112,7 +112,7 @@ This example code, provided by Google, formed the basis for executing both of my
 * https://github.com/googleapis/java-dataproc/blob/master/samples/snippets/src/main/java/SubmitHadoopFsJob.java
 
 The official Apache Maven documentation, specifically its tutorial on using Maven and constructing a pom file, was used
-to quickly packaged my gui application into a runnable jar:
+to quickly package my gui application into a runnable jar:
 * https://maven.apache.org/guides/getting-started/index.html
 * https://maven.apache.org/pom.html
 
