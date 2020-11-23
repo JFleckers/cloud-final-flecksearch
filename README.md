@@ -1,4 +1,8 @@
 # FleckSearch
+Author: James Fleckenstein
+
+This repository serves as my submission for the CS 1660 term project, Option 2.
+
 
 ## Compiling the jars for the Cluster
 To perform this step, you must have a running Dataproc cluster on the Google cloud, and must also have the required 
